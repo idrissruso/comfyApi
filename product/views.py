@@ -1,4 +1,3 @@
-#import json to convert python dictionary to json string
 from django.http.response import JsonResponse
 from .serializers import ProductSerializer
 from rest_framework import status
@@ -15,7 +14,6 @@ def home(request):
 def create_product(request):
     if request.method == "POST":
         data = request.data
-        print(data)
         serializer = ProductSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
@@ -32,3 +30,17 @@ def get_products(request):
         serializer = ProductSerializer(products, many=True)
         response = {"message": "success", "status": status.HTTP_200_OK,"products": serializer.data,}
         return JsonResponse(response, safe=False)
+    
+@api_view(['POST'])
+def create_products(request):
+    if request.method == "POST":
+        data = request.data
+        for product in data:
+            serializer = ProductSerializer(data=product)
+            if serializer.is_valid():
+                serializer.save()
+            else:
+                response = {"message": "failed", "status": status.HTTP_400_BAD_REQUEST, "product": serializer.errors,}
+                return JsonResponse(response, status=status.HTTP_400_BAD_REQUEST)
+        response = {"message": "success", "status": status.HTTP_201_CREATED,}
+        return JsonResponse(response, status=status.HTTP_201_CREATED)
