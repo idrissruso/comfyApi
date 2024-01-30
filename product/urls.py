@@ -6,4 +6,5 @@ urlpatterns = [
     path("create/", create_product, name="createProduct"),
     path("all/", get_products, name="getProducts"),
     path("create/products/", create_products, name="createProducts"),
+    path("featured/", get_featured_products, name="getFeaturedProducts"),
 ]

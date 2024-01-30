@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from .models import Product
 from django.views.decorators.csrf import csrf_exempt
+import random 
 
 # Create your views here.
 def home(request):
@@ -44,3 +45,14 @@ def create_products(request):
                 return JsonResponse(response, status=status.HTTP_400_BAD_REQUEST)
         response = {"message": "success", "status": status.HTTP_201_CREATED,}
         return JsonResponse(response, status=status.HTTP_201_CREATED)
+
+
+@api_view(['GET'])
+def get_featured_products(request):
+    if request.method == "GET":
+        products = Product.objects.all()
+        featured_products = random.sample(list(products), 3)
+        serializer = ProductSerializer(featured_products, many=True)
+        response = {"message": "success", "status": status.HTTP_200_OK,"products": serializer.data,}
+        return JsonResponse(response, safe=False)
+    
