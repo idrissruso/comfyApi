@@ -3,14 +3,12 @@ from .serializers import ProductSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from .models import Product
-from django.views.decorators.csrf import csrf_exempt
 import random 
 
 # Create your views here.
 def home(request):
     return JsonResponse({"message": "welcome to the home page"})
 
-@csrf_exempt
 @api_view(['POST'])
 def create_product(request):
     if request.method == "POST":
