@@ -21,6 +21,17 @@ def create_product(request):
         response = {"message": "failed", "status": status.HTTP_400_BAD_REQUEST, "product": serializer.errors,}
         return JsonResponse(response, status=status.HTTP_400_BAD_REQUEST)
     
+@api_view(['GET'])
+def get_product_by_page(request, page):
+    if request.method == "GET":
+        products = Product.objects.all()
+        page_size = 15
+        start = page_size * (page - 1)
+        end = page_size * page
+        serializer = ProductSerializer(products[start:end], many=True)
+        response = {"message": "success", "status": status.HTTP_200_OK,"products": serializer.data,}
+        return JsonResponse(response, safe=False)
+
 
 @api_view(['GET'])
 def get_products(request):

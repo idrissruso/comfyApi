@@ -7,4 +7,5 @@ urlpatterns = [
     path("all/", get_products, name="getProducts"),
     path("create/products/", create_products, name="createProducts"),
     path("featured/", get_featured_products, name="getFeaturedProducts"),
+    path("page/<int:page>/", get_product_by_page, name="getProductByPage"),
 ]
