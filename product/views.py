@@ -65,3 +65,11 @@ def get_featured_products(request):
         response = {"message": "success", "status": status.HTTP_200_OK,"products": serializer.data,}
         return JsonResponse(response, safe=False)
     
+@api_view(['GET'])
+def get_product_by_id(request, id):
+    if request.method == "GET":
+        product = Product.objects.get(id=id)
+        serializer = ProductSerializer(product)
+        response = {"message": "success", "status": status.HTTP_200_OK,"product": serializer.data,}
+        return JsonResponse(response, safe=False)
+    

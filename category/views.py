@@ -30,3 +30,11 @@ def get_categories(request):
         serializer = CategorySerializer(categories, many=True)
         response = {"message": "success", "status": status.HTTP_200_OK,"categories": serializer.data,}
         return JsonResponse(response, safe=False)
+    
+@api_view(['GET'])
+def get_category_by_id(request, id):
+    if request.method == "GET":
+        category = Category.objects.get(id=id)
+        serializer = CategorySerializer(category)
+        response = {"message": "success", "status": status.HTTP_200_OK,"category": serializer.data,}
+        return JsonResponse(response, safe=False)
