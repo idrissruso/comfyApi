@@ -9,4 +9,6 @@ urlpatterns = [
     path("featured/", get_featured_products, name="getFeaturedProducts"),
     path("page/<int:page>/", get_product_by_page, name="getProductByPage"),
     path("<int:id>/", get_product_by_id, name="getProductById"),
+    path("category/<int:category>/<int:page>/", get_product_by_category_page, name="getProductByCategoryPage"),
+    path("category/<int:category>/", get_product_by_category, name="getProductByCategory"),
 ]

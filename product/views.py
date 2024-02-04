@@ -72,4 +72,23 @@ def get_product_by_id(request, id):
         serializer = ProductSerializer(product)
         response = {"message": "success", "status": status.HTTP_200_OK,"product": serializer.data,}
         return JsonResponse(response, safe=False)
+
+
+@api_view(['GET'])
+def get_product_by_category_page(request, category, page):
+    if request.method == "GET":
+        products = Product.objects.filter(category=category)
+        page_size = 15
+        start = page_size * (page - 1)
+        end = page_size * page
+        serializer = ProductSerializer(products[start:end], many=True)
+        response = {"message": "success", "status": status.HTTP_200_OK,"products": serializer.data,}
+        return JsonResponse(response, safe=False)
     
+@api_view(['GET'])
+def get_product_by_category(request, category):
+    if request.method == "GET":
+        products = Product.objects.filter(category=category)
+        serializer = ProductSerializer(products, many=True)
+        response = {"message": "success", "status": status.HTTP_200_OK,"products": serializer.data,}
+        return JsonResponse(response, safe=False)  
