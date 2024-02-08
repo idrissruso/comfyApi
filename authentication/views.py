@@ -24,6 +24,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 class RegisterView(APIView):
     @api_view(['POST'])
     def register(request):
+        print(request.data)
         serializer = CustomUserCreationForm(data=request.data)
         if serializer.is_valid():
             serializer.save()
