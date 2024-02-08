@@ -14,7 +14,12 @@ SECRET_KEY = 'django-insecure-(j(9ab(g=yt+f1ck1$-j$t*u^2esl4gbqhcx20kkz*f#_%f+jo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    ".vercel.app,"
+    "localhost",
+    "127.0.0.1",
+    "comfy-api.vercel.app"
+]
 
 
 # Application definition
@@ -32,6 +37,7 @@ INSTALLED_APPS = [
     "category",
     "rest_framework",
     'corsheaders',
+    "frontend",
     'rest_framework_simplejwt',
     'authentication',
     'rest_framework_simplejwt.token_blacklist'
