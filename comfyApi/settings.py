@@ -138,8 +138,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
+    "http://127.0.0.1:3000",
     "http://localhost:5173",
-    "https://silhouete.netlify.app"
+    "https://silhouete.netlify.app",
+    "http://localhost:3000",
+    "http://localhost:3000"
+    "*"
 ]
 
 CORS_ALLOWED_HEADERS = list(default_headers) + [
